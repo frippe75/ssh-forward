@@ -1,0 +1,6 @@
+Host jumphost
+  User frta
+  LocalForward 443 10.48.0.101:443
+  IdentityFile /home/sshuser/.ssh/key.pem
+  IdentitiesOnly yes
+

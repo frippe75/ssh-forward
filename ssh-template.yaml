@@ -1,0 +1,50 @@
+kind: Template
+apiVersion: v1
+metadata:
+  annotations:
+    description: Simple SSH portforwarding
+    tags: ssh-forward
+  name: ssh-forward
+objects:
+- kind: DeploymentConfig
+  apiVersion: v1
+  metadata:
+    labels:
+      app: ${APPLICATION_NAME}
+    name: ${APPLICATION_NAME}
+  spec:
+    replicas: 1
+    selector:
+      app: ${APPLICATION_NAME}
+      deploymentconfig: ${APPLICATION_NAME}
+    strategy:
+      rollingParams:
+        intervalSeconds: 1
+        maxSurge: 25%
+        maxUnavailable: 25%
+        timeoutSeconds: 600
+        updatePeriodSeconds: 1
+      type: Rolling
+    template:
+      metadata:
+        labels:
+          app: ${APPLICATION_NAME}
+          deploymentconfig: ${APPLICATION_NAME}
+      spec:
+        containers:
+        - image: synergy-ssh
+          imagePullPolicy: Always
+          name: ${APPLICATION_NAME}
+          #ports:
+          #- containerPort: 3000
+          #  protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        terminationGracePeriodSeconds: 30
+parameters:
+- name: APPLICATION_NAME
+  description: The name for the application.
+  required: true
+  value: ssh-forward
