@@ -44,6 +44,7 @@ objects:
           volumeMounts:
           - name: ssh-key-volume
             mountPath: "/etc/ssh-key"
+            readOnly: true
         volumes:
         - name: ssh-key-volume
           secret:

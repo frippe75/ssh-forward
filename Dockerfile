@@ -5,9 +5,13 @@ RUN apk update \
   ca-certificates \
   bash
 
+RUN mkdir /ssh
 # https://docs.openshift.com/container-platform/3.9/creating_images/guidelines.html
-#RUN chgrp -R 0 /some/directory && \
-#    chmod -R g=u /some/directory
+RUN chgrp -R 0 /ssh && \
+    chmod -R g=u /ssh
+RUN chmod g=u /etc/passwd
+ENTRYPOINT [ "uid_entrypoint" ]
+USER 1001
 
 #RUN adduser -D sshuser
 #USER sshuser
