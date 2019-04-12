@@ -5,21 +5,22 @@ RUN apk update \
   ca-certificates \
   bash
 
-RUN mkdir /.ssh
-# https://docs.openshift.com/container-platform/3.9/creating_images/guidelines.html
-RUN chgrp -R 0 /.ssh && \
-    chmod -R g=u /.ssh
-RUN chmod g=u /etc/passwd
-ENTRYPOINT [ "uid_entrypoint" ]
-USER 1001
-
-#RUN adduser -D sshuser
+RUN adduser -D ssh
 #USER sshuser
-COPY config /.ssh/config
+
+RUN mkdir /home/ssh/.ssh
+# https://docs.openshift.com/container-platform/3.9/creating_images/guidelines.html
+RUN chgrp -R 0 /home/ssh/.ssh && \
+    chmod -R g=u /home/ssh/.ssh
+RUN chmod g=u /etc/passwd
+
+COPY config /home/ssh/.ssh/config
 
 # fix perms
-RUN chown -R default:default /.ssh
+RUN chown -R ssh /home/ssh/.ssh
 
 COPY docker-entrypoint.sh /usr/local/bin/
+
+USER 1001
 #RUN ln -s /usr/local/bin/docker-entrypoint.sh / # backwards compat
 ENTRYPOINT ["docker-entrypoint.sh"]
