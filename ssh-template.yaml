@@ -41,6 +41,9 @@ objects:
           #  protocol: TCP
           resources: {}
           terminationMessagePath: /dev/termination-log
+          volumeMounts:
+          - name: ssh-key-volume
+            mountPath: "/etc/ssh-key"
         volumes:
         - name: ssh-key-volume
           secret:

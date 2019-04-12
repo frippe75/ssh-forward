@@ -12,7 +12,6 @@ RUN apk update \
 #RUN adduser -D sshuser
 #USER sshuser
 COPY config /config
-COPY key/key.pem /key.pem
 
 COPY docker-entrypoint.sh /usr/local/bin/
 #RUN ln -s /usr/local/bin/docker-entrypoint.sh / # backwards compat
