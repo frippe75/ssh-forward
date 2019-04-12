@@ -5,17 +5,17 @@ RUN apk update \
   ca-certificates \
   bash
 
-RUN mkdir /ssh
+RUN mkdir /.ssh
 # https://docs.openshift.com/container-platform/3.9/creating_images/guidelines.html
-RUN chgrp -R 0 /ssh && \
-    chmod -R g=u /ssh
+RUN chgrp -R 0 /.ssh && \
+    chmod -R g=u /.ssh
 RUN chmod g=u /etc/passwd
 ENTRYPOINT [ "uid_entrypoint" ]
 USER 1001
 
 #RUN adduser -D sshuser
 #USER sshuser
-COPY config /config
+COPY config /.ssh/config
 
 COPY docker-entrypoint.sh /usr/local/bin/
 #RUN ln -s /usr/local/bin/docker-entrypoint.sh / # backwards compat
