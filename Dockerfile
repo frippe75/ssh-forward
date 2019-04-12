@@ -17,6 +17,9 @@ USER 1001
 #USER sshuser
 COPY config /.ssh/config
 
+# fix perms
+RUN chown -R default:default /.ssh
+
 COPY docker-entrypoint.sh /usr/local/bin/
 #RUN ln -s /usr/local/bin/docker-entrypoint.sh / # backwards compat
 ENTRYPOINT ["docker-entrypoint.sh"]
