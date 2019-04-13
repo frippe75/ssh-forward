@@ -9,6 +9,7 @@ RUN adduser -D ssh
 #USER sshuser
 
 RUN mkdir -p /home/ssh/.ssh
+WORKDIR /home/ssh
 # https://docs.openshift.com/container-platform/3.9/creating_images/guidelines.html
 RUN chgrp -R 0 /home/ssh/.ssh && \
     chmod -R g=u /home/ssh/.ssh

@@ -43,13 +43,15 @@ objects:
           terminationMessagePath: /dev/termination-log
           volumeMounts:
           - name: ssh-key-volume
-            mountPath: "/etc/ssh-key"
-            readOnly: true
+            mountPath: "/home/ssh/.ssh/"
+            #readOnly: true
+        # https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-files-from-a-pod
         volumes:
         - name: ssh-key-volume
           secret:
             secretName: my-ssh-key
-            defaultMode: 256
+            #defaultMode: 256
+            mode: 256
         dnsPolicy: ClusterFirst
         restartPolicy: Always
         terminationGracePeriodSeconds: 30
