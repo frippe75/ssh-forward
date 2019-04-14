@@ -2,7 +2,7 @@
 
 if ! whoami &> /dev/null; then
   if [ -w /etc/passwd ]; then
-    echo "${USER_NAME:-ssh}:x:$(id -u):0:${USER_NAME:-ssh} user:${HOME}:/sbin/nologin" >> /etc/passwd
+    echo "${USER_NAME:-ssh}:x:$(id -u):0:${USER_NAME:-ssh} user:/home/ssh:/sbin/nologin" >> /etc/passwd
   fi
 fi
 
