@@ -1,5 +1,5 @@
 LocalForward 443 10.48.0.101:443
-IdentityFile /home/sshuser/.ssh/id_rsa
+IdentityFile /home/ssh/.ssh/id_rsa
 IdentitiesOnly yes
 StrictHostKeyChecking no
-erKnownHostsFile /dev/null
+UserKnownHostsFile /dev/null
