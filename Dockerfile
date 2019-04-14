@@ -18,7 +18,7 @@ RUN chmod g=u /etc/passwd
 COPY config /home/ssh/.ssh/config
 
 # fix permissons
-RUN chown -R ssh /home/ssh/.ssh
+RUN chown -R ssh:ssh /home/ssh/.ssh
 
 COPY docker-entrypoint.sh /usr/local/bin/
 
